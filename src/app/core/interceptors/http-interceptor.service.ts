@@ -1,21 +1,20 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, finalize, Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { LoadingService } from '../services/loading/loading-services.service';
+import { ToastService } from '../services/toast/toast.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private readonly loading: LoadingService) { }
+  constructor(private readonly toastService: ToastService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loading.show();
     
     const newReq = req.clone({
       url: environment.apiUrl + req.url
     })
-
-    return next.handle(newReq).pipe(delay(2000), finalize(() => this.loading.hide()));
+    
+    return next.handle(newReq).pipe(tap({ error: () => this.toastService.showError( 'Error, intente nuevamente') }));
   }
 }

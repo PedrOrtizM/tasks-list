@@ -1,1 +1,35 @@
-<p>task list works!</p>
+<div class="col-12 col-lg-10 offset-lg-1 p-2">
+    <h2 class="mb-4 mt-4">Hola {{ user?.name }} {{ user?.lastname }}</h2>
+    <button (click)="openAddTaskModal()" class="btn btn-primary mb-4"> Nueva tarea </button>
+
+    <input class="form-control w-25 mb-4" [(ngModel)]="searchValue" type="text" placeholder="Buscar.."
+        id="input-search">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th> </th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of (tasks | async ) || [] | Filter: searchValue">
+                <td>
+                    <input (click)="onCheckChange(task)" class="form-check-input" type="checkbox"
+                        [checked]="task.completed">
+                </td>
+                <td [ngClass]="{'task-completed': task.completed }">{{ task.title }}</td>
+                <td [ngClass]="{'task-completed': task.completed }">{{ task.description }}</td>
+                <td>{{ task.completed ? 'Completada' : 'Pendiente' }}</td>
+                <td>
+                    <button (click)="openEditTaskModal(task)" class="btn btn-primary m-1"><i class='far fa-edit'></i>
+                    </button>
+                    <button (click)="deleteTask(task)" class="btn btn-danger m-1"> <i class='far fa-trash-alt'></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
