@@ -15,6 +15,6 @@ export class HttpInterceptorService implements HttpInterceptor {
       url: environment.apiUrl + req.url
     })
     
-    return next.handle(newReq).pipe(tap({ error: () => this.toastService.showError( 'Error, intente nuevamente') }));
+    return next.handle(newReq).pipe(tap({ error: () => this.toastService.show( 'Error, intente nuevamente','danger') }));
   }
 }

@@ -28,7 +28,7 @@ export class LoginComponent {
       .loginUser(this.userForm.value as Partial<User>)
       .subscribe({
         next: () => this.router.navigate(['/dashboard']),
-        error: () => this.toastService.showError('Error al iniciar sesión')
+        error: () => this.toastService.show('Error al iniciar sesión','danger')
       })
   }
 

@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
-import { TaskModalComponent } from './components/add-task-modal/task-modal.component';
+import { TaskModalComponent } from './components/task-modal/task-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipeModule } from '../common/filter/filter.module';
 

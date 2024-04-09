@@ -10,12 +10,8 @@ export class ToastService {
 
   constructor() { }
 
-  public show(body: string, delay?: number): void {
-    this.toasts.push({ body, delay, className: 'bg-success text-light' });
-  }
-
-  public showError(body: string, delay?: number): void {
-    this.toasts.push({ body, delay, className: 'bg-danger text-light' });
+  public show(body: string, type?: 'danger' | 'success', delay?: number): void {
+    this.toasts.push({ body, delay, className: `bg-${type || 'success'} text-light` });
   }
 
   public remove(toast: ToastInfo): void {

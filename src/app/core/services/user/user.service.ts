@@ -22,14 +22,7 @@ export class UserService {
         return userList.find((user) => user.email === userAuth.email && user.password === userAuth.password);
       }),
       switchMap((resp) => resp ? of(resp) : throwError(() => new Error(`Unauthorized`))),
-      tap((user) => this.sessionService.setUserInfo(user)))
+      tap(({ email, id, name, lastname }) => this.sessionService.setUserInfo({ email, id, name, lastname })))
   }
 
-  public getUsers() {
-    return this.http.get(this.url);
-  }
-
-  public addUser(user: User) {
-    return this.http.post(this.url, user);
-  }
 }
